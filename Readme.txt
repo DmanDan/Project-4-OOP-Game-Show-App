@@ -1,3 +1,17 @@
+This app is a take on the game "Hangman". 
+This was created for the Team Treehouse Fullstack Javascript techdegree course.
+Inputs are an onscreen keyboard or physical keyboard key presses.
+Each phrase contains a hint that can be viewed by clicking the hint button during a game.
+On win (completed phrase) or lose (5 incorrect guesses). A game over screen displays the correct answer.
+The game can be restarted by pressing enter or clicking the new game button displayed on screen.
+
+Some CSS patterns found at: https://bansal.io/pattern-css#installation.
+Script to convert string to titleCase was modified from a post found at: https://stackoverflow.com/a/5574446
+
+
+
+
+
 To improve key selection visibility for me:
     Unpicked keys have been darkened while text has been brightened
     Correct keys have been brightened/saturated a bit,
