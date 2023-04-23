@@ -63,7 +63,7 @@ class Game{
             const phrase = this.activePhrase;
             const letter = btn.textContent;
             btn.disabled = true;
-            console.log(btn);
+            //console.log(btn); //debug to check key disable.
             if(phrase.checkLetter(letter)){
                 phrase.showMatchedLetter(letter);
                 btn.classList.add('chosen');
