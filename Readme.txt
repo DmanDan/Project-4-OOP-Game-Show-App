@@ -52,3 +52,11 @@ To avoid highlighting the solution:
         color: transparent;
     }
 
+HTML Changes:
+    added button and h1 class to the banner div to enable a hint option.
+
+            <div id="banner" class="section">
+				<h2 class="header">Phrase Hunter</h2>
+				<button class="hint">Show Hint</button>
+				<h1 class="hint">Hint: Oxymoron</h1>
+			</div>

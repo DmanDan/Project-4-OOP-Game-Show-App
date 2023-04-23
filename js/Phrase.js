@@ -8,17 +8,21 @@
  * Hold the phrase
  * Methods to:  display the phrase, check guess, display matches, convert a guess to title case
  * @constructor 
- * @param {string} phrase 
+ * @param {string} phrase   The phrase to be guessed. 
+ * @param {string} hint     A hint to be displayed for the phrase
  */
 class Phrase{
-    constructor(phrase){
+    constructor(phrase,hint){
         this.phrase = phrase.toLowerCase();
+        this.hint = hint
     }
     /**
      * Creates the HTML list item for each letter in the phrase.
+     * Update the hint text with the phrases hint.
      */
     addPhraseToDisplay(){
         const displayElement = document.querySelector('#phrase ul');
+        const hint = document.querySelector('h1.hint')
         this.phrase.split('').forEach( letter => {
             let li = document.createElement('li');
             li.innerHTML= letter;
@@ -29,6 +33,8 @@ class Phrase{
             }
             displayElement.appendChild(li)
         })
+        hint.textContent=`Hint: ${this.hint}`;
+        hint.style.display = 'none';
     }
     /**
      * Checks a guess against the phrase.

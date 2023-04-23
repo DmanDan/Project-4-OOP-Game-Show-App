@@ -34,3 +34,11 @@ document.addEventListener('keydown', (e) => {
        });
     }
 });
+/**
+ * Listen for a click event on the button with hint class.
+ * Hide the button and show the hint text.
+ */
+document.querySelector('button.hint').addEventListener('click',(e)=>{
+    e.target.style.display = 'none';
+    e.target.nextElementSibling.style.display='';
+})

@@ -13,11 +13,16 @@ class Game{
     constructor(){
         this.missed = 0;
         this.phrases = [
-            new Phrase('Same Difference'),
-            new Phrase('Original Copy'),
-            new Phrase('Calm Rage'),
-            new Phrase('Jumbo Shrimp'),
-            new Phrase('Even Odds')
+            new Phrase('Same Difference','Oxymoron'),
+            new Phrase('Hall and Oates','Musical artists'),
+            new Phrase('Frodo Baggins','Fantasy character'),
+            new Phrase('Beagle','Dog Bread'),
+            new Phrase('Toy Story','Pixar'),
+            new Phrase('Cream Soda','Pop'),
+            new Phrase('Hogwarts','School'),
+            new Phrase('Brandon Sanderson','Author'),
+            new Phrase('Samsung','Phone'),
+            new Phrase('Baseball','Sport')
         ]
         this.activePhrase = null;
         this.active = false;
@@ -29,8 +34,9 @@ class Game{
     startGame(){
         this.active = true;
         this.activePhrase = this.getRandomPhrase();
-        document.getElementById('overlay').style.display = 'none';
         this.activePhrase.addPhraseToDisplay();
+        document.getElementById('overlay').style.display = 'none';
+        document.getElementById('overlay').classList='start';
     }
     /**
      * Get a random phrase.
@@ -38,14 +44,14 @@ class Game{
      * @returns {Phrase} New activePhrase
      */
     getRandomPhrase(){
-        let rand = Math.floor(Math.random() * 4);
+        let rand = Math.floor(Math.random() * this.phrases.length);
         if(this.activePhrase){
             let newPhrase = false;
             while(!newPhrase){
                 if(this.phrases[rand]!==this.activePhrase){
                     newPhrase = true;
                 } else {
-                rand = Math.floor(Math.random() * 4);
+                rand = Math.floor(Math.random() * this.phrases.length);
                 }
             }
         }
@@ -53,7 +59,7 @@ class Game{
     }
    
     /**
-     * Callback function, Handles any guess (keypress or button click)
+     * Handles any guess (keypress or button click)
      * Disables that guess, sets classes to display correct or wrong
      * Checks for win or reduces life total. 
      * @param {element} btn the button element clicked or associated with the keypress
@@ -74,7 +80,13 @@ class Game{
             }
         }
     }
-
+    /**
+     * checks for win
+     * @returns {boolean} returns if the game is won
+     */
+    checkForWin(){
+        return (document.querySelectorAll('li.hide').length===0);
+    }
     /**
      * reduces life total by one
      * triggers game over if applicable.
@@ -88,13 +100,6 @@ class Game{
         }
     }
     /**
-     * checks for win
-     * @returns {boolean} returns if the game is won
-     */
-    checkForWin(){
-        return (document.querySelectorAll('li.hide').length===0);
-    }
-    /**
      * locks the game. Displays a win/lose message based on param. Trigger the game board clear.
      * @param {boolean} victory was the game over because of a win 
      */
@@ -103,7 +108,7 @@ class Game{
         let message;
         let messageElement = document.getElementById('game-over-message') 
         let overlay = document.getElementById('overlay')
-        overlay.style.display='block';
+        overlay.style.display='';
         if(victory){
             overlay.classList='win start';
             message=`Winner! The phrase was "${this.activePhrase.toTitleCase()}"`;
@@ -116,7 +121,7 @@ class Game{
     }
     /**
      * Clear the game board.
-     * Removes letters, resets lives, unlock and reset all keys
+     * Removes letters, resets lives, unlock and reset all keys, reset Hint elements. 
      */
     clearBoard(){
         this.missed = 0;
@@ -133,5 +138,8 @@ class Game{
             key.disabled = false;
             key.className = 'key';
         })
+        const hint = document.querySelector('button.hint')
+        hint.style.display = '';
+        hint.nextElementSibling.style.display = 'none';
     }
 }
